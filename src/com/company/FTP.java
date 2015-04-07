@@ -159,6 +159,11 @@ public class FTP extends Handler {
         public void setData(String data) {
             this.data = data;
         }
+
+        @Override
+        public String toString() {
+            return code.toString() + " " + data;
+        }
     }
 
     private Message parseResponse(final String input) {

@@ -16,9 +16,9 @@ public class CommandThread extends Thread {
         @Override
         public void handle(EventThread.Event event) {
             String type = event.getType();
-            System.out.println("Got response, type " + type);
+            System.out.println("" + type);
             FTP.Message message = (FTP.Message) event.getData();
-            System.out.println("Data: " + message);
+            System.out.println("RESPONSE: " + message);
             switch (type) {
                 case "GREET":
                     break;
