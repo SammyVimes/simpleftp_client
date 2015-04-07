@@ -18,6 +18,10 @@ public class CommandThread extends Thread {
             String type = event.getType();
             System.out.println("" + type);
             FTP.Message message = (FTP.Message) event.getData();
+            if (message.getCode() == FTP.FTPCode.COMMAND_FAILED) {
+                System.out.println("Failed to execute command: " + message);
+                return;
+            }
             System.out.println("RESPONSE: " + message);
             switch (type) {
                 case "GREET":

@@ -40,12 +40,9 @@ public class FTP extends Handler {
             String[] arr = type.split(" ");
             outputStream.write(type);
             outputStream.flush();
-            String inputLine;
             String fullLine = "";
             int lines = 0;
             try {
-//            while ((inputLine = inputStream.readLine()) != null)
-//                fullLine += inputLine;
                 fullLine = inputStream.readLine();
                 if ("LIST".equals(type)) {
                     lines = Integer.parseInt(fullLine.split(" ")[1]);
@@ -58,6 +55,10 @@ public class FTP extends Handler {
                 }
             } catch (IOException e) {
                 e.printStackTrace();
+            }
+            if (fullLine.isEmpty()) {
+                handler.addEvent("UNRECOGNIZED COMMAND", new Message(FTPCode.COMMAND_FAILED, ""));
+                return;
             }
             Message message = parseResponse(fullLine);
             if (type.contains("RETR")) {
@@ -120,11 +121,8 @@ public class FTP extends Handler {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        String inputLine;
         String fullLine = "";
         try {
-//            while ((inputLine = inputStream.readLine()) != null)
-//                fullLine += inputLine;
             fullLine = inputStream.readLine();
         } catch (IOException e) {
             e.printStackTrace();
@@ -177,7 +175,7 @@ public class FTP extends Handler {
         return message;
     }
 
-    private enum FTPCode {
+    public enum FTPCode {
         COMMAND_SUCCEED(240),
         COMMAND_FAILED(140),
         COMMAND_CONNECTION_CLOSED(520),

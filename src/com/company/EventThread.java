@@ -50,7 +50,7 @@ public class EventThread extends Thread {
             try {
                 Event event = events.take();
                 event.handler.handle(event);
-            } catch (InterruptedException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
