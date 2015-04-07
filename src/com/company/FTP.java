@@ -12,12 +12,7 @@ import java.util.List;
 public class FTP extends Handler {
 
     private List<String> files = null;
-    private String userName;
-    private String password;
     private Handler handler;
-
-
-
     private Socket connectionSocket = null;
     private Socket dataConnectionSocket = null;
     private BufferedReader inputStream = null;
